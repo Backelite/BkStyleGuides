@@ -10,10 +10,11 @@
 
 * [Language](#language)
 * [Nommage](#nommage)
-* * [Classes et Méthodes](#classes-et-méthodes)
-* * [Variables locales](#variables-locales)
+* * [Classes et Méthodes] (#classes-et-méthodes)
+* * [Propriétés et Accesseurs] (#propriétés-et-accesseurs)
+* * [Variables locales] (#variables-locales)
 * * [Structures de contrôle](#structures-de-contrôle)
-* * [Opérateur ternaire](#opérateur-ternaire)
+* * [Opérateur ternaire] (#opérateur-ternaire)
 * [Organisation du code](#organisation-du-code)
 * [Projet Windows](#projet-windows)
 
@@ -111,6 +112,18 @@ public interface IStringService
 {
    
 }
+```
+
+### Propriétés et Accesseurs
+
+Le nom d'une propriété doit commencer par un underscore suivi d'une minuscule.
+Le nom de l'accesseur associé doit être celui de la propriété associé moins l'underscore et la première lettre en majuscule.
+
+**Par exemple:**
+
+```
+private bool _isTrue;
+public bool IsTrue { get; set; }
 ```
 
 ### Variables locales
