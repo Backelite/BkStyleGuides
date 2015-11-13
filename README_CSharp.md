@@ -10,12 +10,14 @@
 
 * [Language](#language)
 * [Nommage](#nommage)
-* * [Classes et Méthodes] (#classes-et-méthodes)
-* * [Propriétés et Accesseurs] (#propriétés-et-accesseurs)
-* * [Variables locales] (#variables-locales)
-* * [Structures de contrôle](#structures-de-contrôle)
-* * [Opérateur ternaire] (#opérateur-ternaire)
+    * [Classes et Méthodes](#classes-et-méthodes)
+    * [Propriétés et Accesseurs](#propriétés-et-accesseurs)
+    * [Variables locales](#variables-locales)
+    * [Constantes](#constantes)
+    * [Structures de contrôle](#structures-de-contrôle)
+    * [Opérateur ternaire](#opérateur-ternaire)
 * [Organisation du code](#organisation-du-code)
+    * [Retour à la ligne](#Retour-à-la-ligne)
 * [Commentaire](#commentaire)
 * [Projet Windows](#projet-windows)
 
@@ -160,6 +162,16 @@ public class UserLog
 }
 ```
 
+### Constantes
+
+Les noms des constantes doivent être en majuscule avec les mots séparés par des underscore.
+
+**Par exemple:**
+
+```
+public static const string SHIPPING_TYPE = "AirMail";
+```
+
 ### Structures de contrôle
 
 On retourne toujours à la ligne après une structure de contrôle pour placer les accolades.
@@ -286,6 +298,32 @@ result = a > b ? x = c > d ? c : d : y;
 
 ## Organisation du code
 
+### Retour à la ligne
+
+Lorsqu'une méthode à beaucoup d'arguments, et nécessite donc des retours à la ligne, ceux-ci doivent être fait après la virgule séparant les arguments.
+
+**Par exemple:**
+
+```
+MethodWithLotOfArgument(
+    1,
+    2,
+    () => { return true; },
+    4,
+    5
+}
+```
+
+**Et non:**
+```
+MethodWithLotOfArgument(1
+    , 2
+    , () => { return true; }
+    , 4
+    , 5
+}
+```
+
 ### Classes
 
 Les variables statiques sont déclarées en haut de la classes, avant les variables globables.
@@ -408,10 +446,3 @@ Un projet classique Backelite s'organise ainsi :
 + - Services
 + - ViewModel
 + - Views
-
-
-
-
-
-
-
