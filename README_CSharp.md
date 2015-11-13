@@ -36,6 +36,8 @@ var myCouleur = new SolidColorBrush(Colors.White);
 
 ## Nommage
 
+Il ne faut pas utiliser de caractère spéciaux (accents, ...) dans le nommage.
+
 Il ne faut pas utiliser la [notation hongroise](https://fr.wikipedia.org/wiki/Notation_hongroise).
 
 **Par exemple:**
@@ -350,7 +352,7 @@ private void MaCommande_Execute()
 * Ils doivent commencer par une majuscule ... Et Finir par un point .
 * Un espace doit être placé entre le // et le début du commentaire
 
-** Exemple :**
+**Par exemple :**
 
 ```
 // Ceci est un commentaire.
@@ -362,7 +364,7 @@ public int Add2(int a) {
 * Dans les structures conditionnelles, aucun commentaire ne doit se trouver à l'extérieur des blocs délimités par les accolades.
 
 
-** Exemple :**
+**Par exemple :**
 
 ```
 if (a % 2 == 0)
@@ -375,7 +377,7 @@ else
 }
 ```
 
-** Et Non :"
+**Et Non :**
 
 ```
 // Si a est pair.
