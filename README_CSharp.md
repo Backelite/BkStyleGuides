@@ -117,12 +117,26 @@ public interface IStringService
 ### Propriétés et Accesseurs
 
 Le nom d'une propriété doit commencer par un underscore suivi d'une minuscule.
-Le nom de l'accesseur associé doit être celui de la propriété associé moins l'underscore et la première lettre en majuscule.
+Le nom de l'accesseur associé doit être celui de la propriété moins l'underscore et la première lettre en majuscule.
 
 **Par exemple:**
 
 ```
 private bool _isTrue;
+public bool IsTrue { get; set; }
+```
+
+**Non Pas:**
+
+```
+private bool isTrue;
+public bool IsTrue { get; set; }
+```
+
+**Ni:**
+
+```
+private bool _IsTrue;
 public bool IsTrue { get; set; }
 ```
 
