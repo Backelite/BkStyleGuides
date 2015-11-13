@@ -16,6 +16,7 @@
 * * [Structures de contrôle](#structures-de-contrôle)
 * * [Opérateur ternaire] (#opérateur-ternaire)
 * [Organisation du code](#organisation-du-code)
+* [Commentaire](#commentaire)
 * [Projet Windows](#projet-windows)
 
 
@@ -343,6 +344,51 @@ private void MaCommande_Execute()
 #endregion
 ```
 	
+## Commentaire
+
+* Les commentaires doivent être sur une ligne séparée.
+* Ils doivent commencer par une majuscule ... Et Finir par un point .
+* Un espace doit être placé entre le // et le début du commentaire
+
+** Exemple :**
+
+```
+// Ceci est un commentaire.
+public int Add2(int a) {
+    ...
+}
+```
+
+* Dans les structures conditionnelles, aucun commentaire ne doit se trouver à l'extérieur des blocs délimités par les accolades.
+
+
+** Exemple :**
+
+```
+if (a % 2 == 0)
+{
+    // Si a est pair.
+}
+else
+{
+    // Si a est impair.
+}
+```
+
+** Et Non :"
+
+```
+// Si a est pair.
+if (a % 2 == 0)
+{
+
+}
+// Si a est impair.
+else
+{
+    
+}
+```
 
 ## Projet Windows
 
