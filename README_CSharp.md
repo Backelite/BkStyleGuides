@@ -17,7 +17,7 @@
     * [Structures de contrôle](#structures-de-contrôle)
     * [Opérateur ternaire](#opérateur-ternaire)
 * [Organisation du code](#organisation-du-code)
-    * [Retour à la ligne](#Retour-à-la-ligne)
+    * [Retour à la ligne](#retour-à-la-ligne)
 * [Commentaire](#commentaire)
 * [Projet Windows](#projet-windows)
 
