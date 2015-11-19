@@ -440,9 +440,9 @@ Un projet classique Backelite s'organise ainsi :
 + - + Converters
 + - + Extensions
 + - + Helpers
-+ - Model
++ - Models
 + - Resources
 + - + images
 + - Services
-+ - ViewModel
++ - ViewModels
 + - Views
