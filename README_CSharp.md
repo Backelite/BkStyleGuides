@@ -10,11 +10,15 @@
 
 * [Language](#language)
 * [Nommage](#nommage)
-* * [Classes et Méthodes](#classes-et-méthodes)
-* * [Variables locales](#variables-locales)
-* * [Structures de contrôle](#structures-de-contrôle)
-* * [Opérateur ternaire](#opérateur-ternaire)
+    * [Classes et Méthodes](#classes-et-méthodes)
+    * [Propriétés et Accesseurs](#propriétés-et-accesseurs)
+    * [Variables locales](#variables-locales)
+    * [Constantes](#constantes)
+    * [Structures de contrôle](#structures-de-contrôle)
+    * [Opérateur ternaire](#opérateur-ternaire)
 * [Organisation du code](#organisation-du-code)
+    * [Retour à la ligne](#retour-à-la-ligne)
+* [Commentaire](#commentaire)
 * [Projet Windows](#projet-windows)
 
 
@@ -33,6 +37,8 @@ var myCouleur = new SolidColorBrush(Colors.White);
 ```
 
 ## Nommage
+
+Il ne faut pas utiliser de caractère spéciaux (accents, ...) dans le nommage.
 
 Il ne faut pas utiliser la [notation hongroise](https://fr.wikipedia.org/wiki/Notation_hongroise).
 
@@ -113,6 +119,32 @@ public interface IStringService
 }
 ```
 
+### Propriétés et Accesseurs
+
+Le nom d'une propriété doit commencer par un underscore suivi d'une minuscule.
+Le nom de l'accesseur associé doit être celui de la propriété moins l'underscore et la première lettre en majuscule.
+
+**Par exemple:**
+
+```
+private bool _isTrue;
+public bool IsTrue { get; set; }
+```
+
+**Non Pas:**
+
+```
+private bool isTrue;
+public bool IsTrue { get; set; }
+```
+
+**Ni:**
+
+```
+private bool _IsTrue;
+public bool IsTrue { get; set; }
+```
+
 ### Variables locales
 
 Utiliser camelCasing pour les arguments d'une méthode et les variables locales.
@@ -128,6 +160,16 @@ public class UserLog
         // ...
     }
 }
+```
+
+### Constantes
+
+Les noms des constantes doivent être en majuscule avec les mots séparés par des underscore.
+
+**Par exemple:**
+
+```
+public static const string SHIPPING_TYPE = "AirMail";
 ```
 
 ### Structures de contrôle
@@ -256,6 +298,32 @@ result = a > b ? x = c > d ? c : d : y;
 
 ## Organisation du code
 
+### Retour à la ligne
+
+Lorsqu'une méthode à beaucoup d'arguments, et nécessite donc des retours à la ligne, ceux-ci doivent être fait après la virgule séparant les arguments.
+
+**Par exemple:**
+
+```
+MethodWithLotOfArgument(
+    1,
+    2,
+    () => { return true; },
+    4,
+    5
+}
+```
+
+**Et non:**
+```
+MethodWithLotOfArgument(1
+    , 2
+    , () => { return true; }
+    , 4
+    , 5
+}
+```
+
 ### Classes
 
 Les variables statiques sont déclarées en haut de la classes, avant les variables globables.
@@ -316,6 +384,51 @@ private void MaCommande_Execute()
 #endregion
 ```
 	
+## Commentaire
+
+* Les commentaires doivent être sur une ligne séparée.
+* Ils doivent commencer par une majuscule ... Et Finir par un point .
+* Un espace doit être placé entre le // et le début du commentaire
+
+**Par exemple :**
+
+```
+// Ceci est un commentaire.
+public int Add2(int a) {
+    ...
+}
+```
+
+* Dans les structures conditionnelles, aucun commentaire ne doit se trouver à l'extérieur des blocs délimités par les accolades.
+
+
+**Par exemple :**
+
+```
+if (a % 2 == 0)
+{
+    // Si a est pair.
+}
+else
+{
+    // Si a est impair.
+}
+```
+
+**Et Non :**
+
+```
+// Si a est pair.
+if (a % 2 == 0)
+{
+
+}
+// Si a est impair.
+else
+{
+    
+}
+```
 
 ## Projet Windows
 
@@ -327,16 +440,9 @@ Un projet classique Backelite s'organise ainsi :
 + - + Converters
 + - + Extensions
 + - + Helpers
-+ - Model
++ - Models
 + - Resources
 + - + images
 + - Services
-+ - ViewModel
++ - ViewModels
 + - Views
-
-
-
-
-
-
-
