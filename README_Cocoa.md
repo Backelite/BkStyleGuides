@@ -489,31 +489,38 @@ result = a > b ? x = c > d ? c : d : y;
 
 Les constantes sont préférables aux literals in-line ou aux nombres, parce qu'elles peuvent être facilement reproduites de variables utilisés souvent et parce qu'elles peuvent être changées facilement sans avoir besoin de faire une recherche. 
 
-### Constantes interne à une classe
+### Constantes privées
 
 **Par exemple:**
 
+*dans le .m*
+
 ```
-NSString * const BkActionNotification = @"Backelite notification";
-const CGFloat BkImageThumbnailHeight = 50.0f;
+static NSString * const BkActionNotification = @"Backelite notification";
+static const CGFloat BkImageThumbnailHeight = 50.0f;
 ```
 
 **Non pas:**
 
 ```
 #define CompanyName @"Backelite"
-
 #define thumbnailHeight 2
 ```
 
-### Constantes public
+### Constantes publiques
 
-On peut rendre nos constantes public, en les exposant dans le .h.
-On utiliser `static` pour s'assurer la constante ne sera pas dupliquée et que c'est bien l'instance unique qui est utilisée.
+*dans le .h*
 
 ```
-FOUNDATION_EXPORT static NSString * const BkActionNotification";
-FOUNDATION_EXPORT static const CGFloat BkImageThumbnailHeight;
+extern NSString * const BkActionNotification;
+extern const CGFloat BkImageThumbnailHeight;
+```
+
+*dans le .m*
+
+```
+NSString * const BkActionNotification = @"MyConstantValue1";
+const CGFloat BkImageThumbnailHeight = @"MyConstantValue1";
 ```
 
 ## Types énumérés
