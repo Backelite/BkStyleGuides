@@ -1,157 +1,204 @@
 
 
-# Backelite - Guide de Style Objective-C
+# Backelite - Objective-C Coding Style
 
-## Sources 
+## Sources
 
-* [Le langage de Programmation Objective-C](http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjectiveC/Introduction/introObjectiveC.html)
-* [Les Bases Fondamentales de Cocoa](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CocoaFundamentals/Introduction/Introduction.html)
-* [Conseils Généraux de Codage pour Cocoa](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html)
-* [Guide de Programmation pour App iOS](http://developer.apple.com/library/ios/#documentation/iphone/conceptual/iphoneosprogrammingguide/Introduction/Introduction.html)
-* [Apple-NamingMethods](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingMethods.html)
-* [Apple-MemoryMgmt](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html)
-* [NYTimes - Guide de Style Objective-C](https://github.com/NYTimes/objective-c-style-guide)
+* [About Objective-C](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html)
+* [Objective-C](https://developer.apple.com/library/content/documentation/General/Conceptual/DevPedia-CocoaCore/ObjectiveC.html)
+* [Introduction to Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html)
+* [App Programming Guide for iOS](http://developer.apple.com/library/ios/#documentation/iphone/conceptual/iphoneosprogrammingguide/Introduction/Introduction.html)
+* [Coding Guidelines for Cocoa - Apple Naming Methods](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingMethods.html)
+* [Advanced Memory Management Programming Guide - ](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html)
+* [NYTimes Objective-C Style Guide](https://github.com/NYTimes/objective-c-style-guide)
 * [github - objective-c-style-guideC](https://github.com/github/objective-c-style-guide)
 * [Raywenderlich - objective-c-style-guideC](https://github.com/raywenderlich/objective-c-style-guide)
 * [Google - objcguide](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml)
 
-## Table des matières
+## Table of Contents
 
 * [Language](#language)
-* [Nommage](#nommage)
-* [Méthodes](#methodes)
-* [Organisation du code](#organisation-du-code)
+* [Spacing](#spacing)
+* [Naming](#naming)
+  * [Underscores](#underscores)
+* [Methods](#methods)
+* [Code Organization](#code-organization)
 * [Variables](#variables)
-* * Libellés (Literals)
-* [Init & Dealloc](#init-et-dealloc)
-* [Notation pointée](#notation-pointée)
-* [Espacement](#espacement)
-* [Conditions](#conditions)
-* [Opérateur ternaire](#opérateur-ternaire)
-* [Constantes](#constantes)
-* [Types énumérés](#types-énumérés)
-* [Masques de bits](#masques-de-bits)
-* [Booléens](#booléens)
-* [Propriétés privées](#propriétés-privées)
 * [Literals](#literals)
-* [Gestion des erreurs](#gestion-des-erreurs)
-* [Fonctions CGRect](#fonctions-cgrect)
-* [Projet Xcode](#projet-xcode)
+* [Types](#types)
+* [Init](#init)
+* [Dot-notation syntax](#dot-notation-syntax)
+* [Conditionals](#conditionals)
+  * [Ternary operator](#ternary-operator)
+  * [Multiple conditionals](#multiple-conditionals)
+  * [Yoda style](#yoda-style)
+  * [Switch](#switch)
+* [Braces](#braces)
+* [Constants](#constants)
+* [Enumerated types](#enumerated-types)
+* [Bitmasks](#bitmasks)
+* [Booleans](#booleans)
+* [Private properties](#private-properties)
+* [Error handling](#error-handling)
+* [Try / catch](#try-catch)
+* [CGRect functions](#cgrect-functions)
+* [Xcode project](#xcode-project)
 
 
 ## Language
 
 US English should be used.
 
-**Par exemple:**
-```
+**Preferred :**
+
+```objc
 UIColor *myColor = [UIColor whiteColor];
 ```
 
-**Non pas:**
-```
+**Not preferred :**
+
+```objc
 UIColor *myColour = [UIColor whiteColor];
 ```
 
-## Nommage
+## Spacing
 
-La convention de nommage Apple devrait être suivie quand possible, surtout en ce qui concerne les [règles de management de mémoire](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html) ([NARC](http://stackoverflow.com/a/2865194/340508)).
+* Indent using 4 spaces (this conserves space in print and makes line wrapping less likely). Never indent with tabs as they can be configured in different ways depending on editors and user preferences. Be sure to set this preference in Xcode.
 
-* Il est mieux d'utiliser des noms descriptifs, et longs si nécessaire, pour les méthodes et variables.
 
-**Par exemple:**
+**Preferred:**
+
+```objc
+if (user.isHappy) {
+    // Do something
+} else {
+    // Do something else
+}
 ```
+
+**Not preferred: (look closer to spot the difference)**
+
+```objc
+if (user.isHappy) {
+	// Do something
+} else {
+	// Do something else
+}
+```
+
+## Naming
+
+Apple naming conventions should be adhered to wherever possible, especially those related to [memory management rules](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html) ([NARC](http://stackoverflow.com/a/2865194/340508)).
+
+Long, descriptive method and variable names are good.
+
+**Preferred:**
+
+```objc
 UIButton *settingsButton;
 ```
 
-**Non pas**
-```
+**Not Preferred:**
+
+```objc
 UIButton *setBut;
 ```
 
-* Un préfixe de trois lettres (par ex. `JMO`) doit toujours être utilisé pour le nom des classes et constantes, mais peut être omis pour le nom des entités dans Core Data. Les constantes doivent adopter la convention camelCase avec tous les mots qui commencent avec une lettre capitale, précédées du nom de la classe dans laquelle ils sont déclarés pour la clarté.
+A three letter prefix (for instance `BKT`) should always be used for class names and constants, however may be omitted for Core Data entity names.
 
-**Par exemple:**
+Constants should be camel-case with all words capitalized and prefixed by the related class name for clarity.
 
-```
-static const NSTimeInterval BkArticleViewControllerNavigationFadeAnimationDuration = 0.3;
-```
+**Preferred:**
 
-**Non pas:**
-
-```
-static const NSTimeInterval fadetime = 1.7;
+```objc
+static NSTimeInterval const BKTTutorialViewControllerNavigationFadeAnimationDuration = 0.3;
 ```
 
-* Les properties et variables locales doivent adopter la convention camelCase avec le premier mot en minuscules.
+**Not Preferred:**
 
-* Les variables d'instance doivent adopter la convention camelCase avec le premier mot en miniscules, précédé par le préfixe  «&#8239;_&#8239;». Ceci est cohérent avec les variables d'instance synthetisées automatiquement par LLVM. **Si LLVM peut synthetiser la variable automatiquement, laissez-le faire.**
-
-**Par exemple:**
-```
-@synthesize nomDeVariableDescriptif = _nomDeVariableDescriptif;
+```objc
+static NSTimeInterval const fadetime = 1.7;
 ```
 
-**Non pas:**
-```
-id nmvar;
+Properties should be camel-case with the leading word being lowercase. Use auto-synthesis for properties rather than manual @synthesize statements unless you have good reason.
+
+**Preferred:**
+
+```objc
+@property (strong, nonatomic) NSString *descriptiveVariableName;
 ```
 
-## Méthodes
+**Not Preferred:**
+
+```objc
+id varnm;
+```
+
+### Underscores
+
+When using properties, instance variables should always be accessed and mutated using `self.`. This means that all properties will be visually distinct, as they will all be prefaced with `self.`. 
+
+An exception to this: inside initializers, the backing instance variable (i.e. _variableName) should be used directly to avoid any potential side effects of the getters/setters.
+
+Local variables should not contain underscores.
+
+## Methods
 
 [Apple-NamingMethods](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingMethods.html)
 
- * Pour la signature d'une méthode, il doit y avoir un espace après le scope (symbole `-` ou `+`). Et il doit y avoir un espace entre les différents segments (paramètres) de la méthode.
+ * In method signatures, there should be a space after the method type (-/+ symbol). There should be a space between the method segments (matching Apple's style).  Always include a keyword and be descriptive with the word before the argument which describes the argument.
 
-**Par exemple:**:
-```
-- (void)setTextePourExemple:(NSString *)texte image:(UIImage *)image;
-```
+**For instance:**
 
- * Longueur des méthodes, pas plus de 50 lignes. Se fixer cette limite permet de mieux découper les fonctionalités.
-
- * La signature des méthodes, il faut utiliser des mots clés pertinents pour décrire ce que va faire la méthodes et les arguments.
- 
-**Par exemple:**:
-
-```
+```objc
 - (void)setExampleText:(NSString *)text image:(UIImage *)image;
-- (void)sendAction:(SEL)aSelector to:(id)anObject forAllCells:(BOOL)flag;
-- (UIVIew *)viewWithTag:(NSInteger)tag;
-- (instancetype)initWithWidth:(CGFloat)width height:(CGFloat)height;
 ```
 
-**Non pas:**
+ * Method should not exceeds 50 lines. This limit allows code readability, reusability and testability.
 
-```
--(void)setT:(NSString *)text i:(UIImage *)image;
-- (void)sendAction:(SEL)aSelector :(id)anObject :(BOOL)flag;
-- (id)taggedView:(NSInteger)tag;
-- (instancetype)initWithWidth:(CGFloat)width andHeight:(CGFloat)height;
-- (instancetype)initWith:(int)width and:(int)height;  // Never do this, the "and" keyword is reserved.
-```
+ * Use pertinent keywords to describe your method and its parameters.
 
-* un seul `return` par méthode, pour faciliter les phases de debug et ne pas avoir à poser 10 breakpoints pour comprendre.
 
-## Organisation du code
+ **Preferred:**
+ 
+ ```objc
+ - (void)setExampleText:(NSString *)text image:(UIImage *)image;
+ - (void)sendAction:(SEL)aSelector to:(id)anObject forAllCells:(BOOL)flag;
+ - (id)viewWithTag:(NSInteger)tag;
+ - (instancetype)initWithWidth:(CGFloat)width height:(CGFloat)height;
+ ```
 
-Utiliser les `#pragma mark -` pour organiser les méthodes et les regrouper en groupe fonctionnel. 
+ **Not Preferred:**
 
-```
+ ```objc
+ -(void)setT:(NSString *)text i:(UIImage *)image;
+ - (void)sendAction:(SEL)aSelector :(id)anObject :(BOOL)flag;
+ - (id)taggedView:(NSInteger)tag;
+ - (instancetype)initWithWidth:(CGFloat)width andHeight:(CGFloat)height;
+ - (instancetype)initWith:(int)width and:(int)height;  // Never do this.
+ ```
+
+ * Only use one `return` in a method to make debugging easier and reduce the use of breakpoints.
+
+
+
+## Code Organization
+
+Use `#pragma mark -` to categorize methods in functional groupings and protocol/delegate implementations following this general structure.
+
+```objc
 #pragma mark - Lifecycle
 
 - (instancetype)init {}
-- (void)dealloc {}
 - (void)viewDidLoad {}
 - (void)viewWillAppear:(BOOL)animated {}
-- (void)didReceiveMemoryWarning {}
 
 #pragma mark - Custom Accessors
 
 - (void)setCustomProperty:(id)value {}
 - (id)customProperty {}
 
-#pragma mark - Actions
+#pragma mark - IBActions
 
 - (IBAction)submitData:(id)sender {}
 
@@ -180,156 +227,140 @@ Utiliser les `#pragma mark -` pour organiser les méthodes et les regrouper en g
 
 ## Variables
 
-Les variables doivent être nommées de la façon la plus descriptive possible. Une variable d'une seule lettre doit être évitée sauf pour une boucle `for`.
+Variables should be named as descriptively as possible. Single letter variable names should be avoided except in `for()` loops.
 
-Les astérisques qui indiquent le pointeur sont plaçés **avant le nom** de la variable, par ex., `NSString *text` et **non** `NSString* text` ou `NSString * text`, sauf dans le cas de constantes (`NSString * const BkConstantString`).
+Asterisks indicating pointers belong with the variable, e.g., `NSString *text` not `NSString* text` or `NSString * text`, except in the case of constants.
 
-La définition des propriétés doivent être utilisées à la place des variables d'instance quand c'est possible. L'accès direct aux variables d'instance doit être évité sauf pour les méthodes d'initialisation (`init`, `initWithCoder:`, etc…), la méthode `dealloc` et les accesseurs et mutateurs. Pour plus d'information sur l'utilisation de méthodes d'accès, les méthodes d'initialisation et dealloc, consultez [cet article](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6).
+[Private properties](#private-properties) should be used in place of instance variables whenever possible. Although using instance variables is a valid way of doing things, by agreeing to prefer properties our code will be more consistent. 
 
-**Par exemple:**
+Direct access to instance variables that 'back' properties should be avoided except in initializer methods (`init`, `initWithCoder:`, etc…), `dealloc` methods and within custom setters and getters. For more information on using Accessor Methods in Initializer Methods and dealloc, see [here](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6).
 
-```
-@interface BKSection: NSObject
+
+**Preferred:**
+
+```objc
+@interface BKTSection : NSObject
 @property (nonatomic) NSString *headline;
 @end
 ```
 
-**Non pas:**
+**Not preferred:**
 
-```
-@interface BKSection : NSObject {
-NSString *headline;
+```objc
+@interface BKTSection : NSObject {
+	NSString *headline;
 }
 ```
 
-###variables locales
-Quand on utlise des variables localement il faut penser à les initialiser.
 
-```
-NSError *error = nil;
-NSUInteger count = 0;
-```
+## Literals
 
-### Libellés (Literals)
-`NSString`, `NSDictionary`, `NSArray`, et `NSNumber` literals doivent être utilisés quand des instances immutables sont créées pour ces objets. Faites bien attention que la valeur `nil` ne soit pas passée aux literals `NSArray` et `NSDictionary`, parce que ça causerait un plantage.
+`NSString`, `NSDictionary`, `NSArray`, and `NSNumber` literals should be used whenever creating immutable instances of those objects. Pay special care that `nil` values can not be passed into `NSArray` and `NSDictionary` literals, as this will cause a crash.
 
-**Par exemple:**
+**Preferred:**
 
-```
-NSArray *names = @[@"Brian", @"Craig", @"Véronique"];
-NSDictionary *productManagers = @{@"iOS" : @"Andrew", @"Android" : @"Kate"};
+```objc
+NSArray *names = @[@"Gilles", @"Philippe", @"David", @"Mickael", @"Gyl", @"Sylvia"];
+NSDictionary *productManagers = @{@"iPhone": @"Jerome", @"iPad": @"Kamal", @"Mobile Web": @"Clément"};
 NSNumber *shouldUseLiterals = @YES;
-NSNumber *buildingZIPCode = @10018;
+NSNumber *zipCode = @75008;
 ```
 
-**Non pas:**
+**Not Preferred:**
 
-```
-NSArray *names = [NSArray arrayWithObjects:@"Brian", @"Craig", @"Véronique", nil];
-NSDictionary *productManagers = [NSDictionary dictionaryWithObjectsAndKeys: @"Andrew", @"iOS", @"Kate", @"Android", nil];
+```objc
+NSArray *names = [NSArray arrayWithObjects:@"Gilles", @"Philippe", @"David", @"Mickael", @"Gyl", @"Sylvia", nil];
+NSDictionary *productManagers = [NSDictionary dictionaryWithObjectsAndKeys: @"Jerome", @"iPhone", @"Kamal", @"iPad", @"Clément", @"Mobile Web", nil];
 NSNumber *shouldUseLiterals = [NSNumber numberWithBool:YES];
-NSNumber *buildingZIPCode = [NSNumber numberWithInteger:10018];
+NSNumber *buildingStreetNumber = [NSNumber numberWithInteger:75008];
 ```
 
-### Types
+## Types
 
-* Utilisation des primitive d'Apple, NSInteger, NSUInteger plutôt que int, long. C'est une bonne idée pour avoir un comportement normal sur du 64 bits. De même, utilisation de  CGFloat plutôt que float.
+Apple's primitives like `NSInteger`, `NSUInteger`, `CGFloat` should be used instead of `int`, `long`, `float`. This will prevent unusual behaviors due to platform architectures (32 vs 64 bits).
 
-* Respecter les types définis par Apple 
 
-**Par exemple:**
-```
-CGRect rec = self.view.frame;
-rec.x = 0.0f;
-rec.x = 10.0f;
+**Preferred:**
+
+```objc
+CGRect rect = self.view.frame;
+rect.x = 0.0f;
+rect.x = 10.0f;
 self.view.frame = rect;
 ```
 
-**Non pas:**
-```
-CGRect rec = self.view.frame;
-rec.x = 0.0;  	//ça c'est un double...
-rec.x = 1;		//ça c'est un int...
+**Not preferred:**
+
+```objc
+CGRect rect = self.view.frame;
+rect.x = 0.0;  	// this is a double
+rect.x = 1;		// this is an int
 self.view.frame = rect;
 ```
 
-## Init et dealloc
+## Init
 
-La méthode `dealloc` doit être placée dans la partie "LifeCycle" de l'object (Cf organisation du code)
-La méthode `init` doit être structurée comme ceci:
+`init` method should be structured like this :
 
-```
+
+```objc
 - (instancetype)init {
-    self = [super init]; // ou appeler l'initialisateur désigné
+    self = [super init]; // or call the designated initializer
     if (self) {
-        // Initialisation particulière à cet object
+        // Custom initialization
     }
-	
+
    return self;
 }
 ```
 
-Utiliser la macro `NS_DESIGNATED_INITIALIZER` pour documenter les init que vous voulez privilégier.
+`NS_DESIGNATED_INITIALIZER` macro should be used to document the init method you want to designate.
 
-### et le new? 
 
-Une petite méthode de fainéant. Déconseillé car la séparation des responsabilités allocation et initialisation n'est pas clair.
-De plus, cela rend plus aléatoire l'`init` (le designated initializer) qui sera appellé.
-Donc on va essayé de l'éviter.
-
-## Notation pointée
-
-La notation pointée doit **toujours** être utilisée pour lire ou modifier les propriétés. 
-La notation crochée est préférable dans tous les autres cas.
-
-**Par exemple:**
+```objc
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 ```
+
+### about the `new` usage
+
+The `new` method should be avoided because it makes unclear which designated initializer method will be used. 
+
+**Preferred:**
+
+```objc
+BKTModel *view = [[BKTModel alloc] init];
+```
+
+**Not Preferred:**
+
+```objc
+BKTModel *view = [BKTModel new];
+```
+
+## Dot-Notation Syntax
+
+Dot-notation is **recommanded** for getting and setting properties.
+Bracket notation is preferred in other cases.
+
+**Preferred:**
+
+```objc
 view.backgroundColor = [UIColor orangeColor];
 [UIApplication sharedApplication].delegate;
 ```
 
-**Non pas:**
-```
+**Not preferred:**
+
+```objc
 [view setBackgroundColor:[UIColor orangeColor]];
 UIApplication.sharedApplication.delegate;
 ```
 
-### Underscores ? ou pas ?
+## Conditionals
 
-Privilégier l'usage de l'accesseurs en utilisant `self.` sauf pendant les méthodes d'init et de dealloc.
+* **ALWAYS** use braces !
 
-## Espacement
-
-* L'indentation est de 4 espaces. N'indentez jamais avec des tabulations. Assurez-vous de régler cette préférence dans Xcode. (Pourquoi? car les tabulations peuvent être gérée différement par la configuration des utilisateurs et les outillages). J'ai par exemple beaucoup de soucis avec SourceTree.
-
-
-**Par exemple:**
-
-```
-if (utilisateur.estHeureux) {
-    //Faire quelque chose
-	
-} else {
-    //Faire quelque chose d'autre
-}
-```
-
-**Non pas (et oui ... ça semble pareil mais c'est une tabulation):**
-
-```
-if (utilisateur.estHeureux) {
-	//Faire quelque chose
-	
-} else {
-	//Faire quelque chose d'autre
-}
-```
-
-## Conditions
-
-* **TOUJOURS** utiliser des accolades
-
-**Par exemple:**
+**Preferred:**
 
 ```
 if (!error) {
@@ -337,332 +368,314 @@ if (!error) {
 }
 ```
 
-**Non pas:**
+**Not preferred:**
 
-```
+```objc
 if (!error) return success;
 ```
 
-* L'accolade ouvrante des méthodes et structures de contrôle (`if`/`else`/`switch`/`while` etc.) est toujours sur la même ligne que la déclaration et l'accolade fermante sur sa propre ligne. 
-* Si le mot clef est en rapport avec l'accolade fermante précédente on le met sur la même ligne (else, while du do…while)
-* On met en espace entre le mot clef et la parenthese qui le suit, l'accolade qui le suit, l'accolade qui le précède
-* Et un saut de ligne avant des conditions imbriquées (else if / else)
+or
 
-**Par exemple:**
+```objc
+if (!error)
+	return success;
+```
+
+### Ternary Operator
+
+The Ternary operator, `?:` , should only be used when it increases clarity or code neatness. A single condition is usually all that should be evaluated. Evaluating multiple conditions is usually more understandable as an `if` statement, or refactored into instance variables.
+
+**Preferred:**
+
+```objc
+result = (a > b) ? x : y;
+```
+
+**Not preferred:**
+
+```objc
+result = a > b ? x = c > d ? c : d : y;
+```
+
+### Multiple conditionals
+
+* When using mutliple conditionals, place the operator on a new line.
+
+```ojc
+if (some_long_condition
+    && some_other_long_condition
+	|| some_completely_different_long_condition) {
+	// Do something
+}
+```
+
+* For complex and multiple conditionals, prefer the following.
+
+**Preferred:**
+
+```objc
+BOOL test1 = some_long_condition && some_other_long_condition;
+BOOL test2 = some_other_long_condition && some_other_long_condition2;
+
+if (test1 || test2) {
+    // Do something
+}
+```
+
+**Not preferred:**
 
 ```
+if (some_long_condition && some_other_long_condition || (some_other_long_condition && some_other_long_condition2) ||
+    some_completely_different_long_condition) {
+
+}
+```
+
+
+### Yoda Style
+
+To prevent from human mistakes, the following code should be avoided.
+
+**Not preferred:**
+
+```objc
+if (myValue == 42) {
+    // Do something
+}
+```
+
+There is a risk the developer may type `myValue = 42`, which will not raise any error.
+
+**Preferred:**
+
+```objc
+if (42 == myValue) {
+    // Do something
+}
+```
+
+But if the developer writes `42 = myValue`, it will easily appear as an error.
+
+### Switch
+
+Use braces.
+
+```objc
+switch (something.state) {
+    case 0: {
+        // Do something
+    }
+        break;
+    case 2:
+    case 3: {
+        // Do something
+    }
+        break;
+    default: {
+        // Do something
+    }
+        break;
+}
+
+```
+
+If every cases are covered by the switch, do no implement a default.
+
+**For instance:**
+
+```objc
+typedef NS_ENUM(NSInteger, BKTState) {
+    BKTStateLoaded,
+    BKTStateLoading,
+    BKTStateInError
+};
+
+switch (state) {
+    case BKTStateLoaded: {
+        // Do something
+    }
+        break;
+    case BKTStateLoading: {
+        // Do something
+    }
+        break;
+    case BKTStateInError: {
+        // Do something
+    }
+        break;
+}
+
+```
+
+## Braces
+
+* The opening brace should be on the same line of the method or the control structure (`if`/`else`/`switch`/`while` etc.). The closing brace should be on its own line.
+* If a keyword is related and preceded by a closing brace, it should be on the same line.
+* There should be a space between a keyboard and the brace / paranthese it is followed / preceded by.
+
+**Preferred:**
+
+```objc
 if (!error) {
     return success;
-	
 } else {
     return failed;
 }
 ```
 
-**Non pas: (méga combo d'erreurs)**
+**Not preferred**
 
-```
+```objc
 if(!error){
     return success;
 } else return failed;
 ```
 
-* Mutliples conditions, placer l'opérateur en début de ligne.
+## Constants
 
-**Par exemple:**
+Constants are preferred over in-line string literals or numbers, as they allow for easy reproduction of commonly used variables and can be quickly changed without the need for find and replace.
 
-```
-if (some_long_condition 
-    && some_other_long_condition 
-	|| some_completely_different_long_condition) {
-}
-```
+### Class-restricted constants
 
-* Mutliples conditions et conditions vraiment bien compliqué
-**Par exemple:**
+**Preferred:**
 
-```
-BOOL test1 = some_long_condition && some_other_long_condition;
-BOOL test2 = some_other_long_condition && some_other_long_condition2;
-
-if (test1 || test2) {
-    ...
-}
+```objc
+NSString * const BKTActionNotification = @"Backelite notification";
+const CGFloat BKTImageThumbnailHeight = 50.0f;
 ```
 
-**Non pas:**
+**Not preferred:**
 
-```
-if (some_long_condition && some_other_long_condition || (some_other_long_condition && some_other_long_condition2) ||
-    some_completely_different_long_condition) {
-    
-}
+```objc
+#define ActionNotification @"Backelite notification"
+#define thumbnailHeight 50
 ```
 
-###Yoda style
-Pour une écriture plus sure et éviter des erreurs humaines de saisies.
+### Public constants
 
-**Non pas:**
-```
-if (maValeur == 42) {
-}
-```
-car il y'a un risque de frape et que l'on saisisse `maValeur = 42` ce qui n'engendre pas d'erreur
+Constants can be made public by exposing them in the .h file.
+`static` should be used to make sure the constant is not duplicated and the instance is unique.
 
-
-**Par exemple:**
-
-```
-if (42 == maValeur) {
-}
-```
-On aura un gros warning si on écrit `42 = maValeur`
-
-###Switch
-
-* Utiliser des accolades
-
-```
-switch (something.state) {
-    case 0: {
-        // Something
-        break;
-    }
-	
-    case 2:
-    case 3: {
-        // Something
-        break;
-    }
-
-    default: {
-        // Something
-        break;
-    }
-}
-
+```objc
+FOUNDATION_EXPORT static NSString * const BKTActionNotification";
+FOUNDATION_EXPORT static const CGFloat BKTImageThumbnailHeight;
 ```
 
-* Si l'ensemble des cas est couvert par le switch, ne pas mettre de default 
+## Enumerated Types
 
-```
-typedef NS_ENUM(NSInteger, BkState) {
-    BkStateLoaded,
-    BkStateLoading,
-   BkStateInError
-};
+When using `enum`s, it is recommended to use the new fixed underlying type specification because it has stronger type checking and code completion. The SDK now includes a macro to facilitate and encourage use of fixed underlying types: `NS_ENUM()`
 
-switch (BkState) {
-    case BkStateLoaded: {
-        // Something
-        break;
-    }
+**For instance:**
 
-    case BkStateLoading: {
-        // Something
-        break;
-    }
-
-    case BkStateInError: {
-        // Something
-        break;
-    }
-}
-
-```
-
-### Opérateur ternaire
-
-L'opérateur ternaire, `?` , doit seulement être utilisé s'il rend le code plus lisible ou propre. Il doit seulement évaluer une condition simple. Évaluer plusieurs conditions est généralement plus facile à comprendre avec une condition de type if, ou refactorisé avec des variables nommées.
-
-**Par exemple:**
-```
-result = (a > b) ? x : y;
-```
-
-**Non pas:**
-```
-result = a > b ? x = c > d ? c : d : y;
-```
-
-## Constantes
-
-Les constantes sont préférables aux literals in-line ou aux nombres, parce qu'elles peuvent être facilement reproduites de variables utilisés souvent et parce qu'elles peuvent être changées facilement sans avoir besoin de faire une recherche. 
-
-### Constantes privées
-
-**Par exemple:**
-
-*dans le .m*
-
-```
-static NSString * const BkActionNotification = @"Backelite notification";
-static const CGFloat BkImageThumbnailHeight = 50.0f;
-```
-
-**Non pas:**
-
-```
-#define CompanyName @"Backelite"
-#define thumbnailHeight 2
-```
-
-### Constantes publiques
-
-*dans le .h*
-
-```
-extern NSString * const BkActionNotification;
-extern const CGFloat BkImageThumbnailHeight;
-```
-
-*dans le .m*
-
-```
-NSString * const BkActionNotification = @"MyConstantValue1";
-const CGFloat BkImageThumbnailHeight = @"MyConstantValue1";
-```
-
-## Types énumérés
-
-Pour l'utilisation d' `enum`, il est recommendé de choisir le type fixe spécifié avec un «&#8239;_&#8239;» parce qu'il est de type fort et pour bénéficier de la complétion de code. Le SDK inclus un macro pour faciliter et encourager l'utilisation de type fixe et souligné — `NS_ENUM()`
-
-**Exemple:**
-
-```
-typedef NS_ENUM(NSInteger, BkState) {
-    BkStateLoaded,
-    BkStateLoading,
-    BkStateInError
+```objc
+typedef NS_ENUM(NSInteger, BKTState) {
+    BKTStateLoaded,
+    BKTStateLoading,
+    BKTStateInError
 };
 ```
 
-## Masques de bits
+## Bitmasks
 
-Quand vous travaillez avec des masques de bits, utilisez le macro `NS_OPTIONS`.
-Pour pouvoir combiner 
+When working with bitmasks, the NS_OPTIONS macro MUST be used.
 
-**Exemple:**
+**Example:**
 
-```
-typedef NS_OPTIONS(NSUInteger, BkState) {
-    BkStateInError					= 1 << 0,
-    BkStateInErrorWSFailed	   	    = 1 << 1,
-    BkStateInErrorNetwork  			= 1 << 2
+```objc
+typedef NS_OPTIONS(NSUInteger, BKTState) {
+    BKTStateInError               = 1 << 0,
+    BKTStateInErrorWSFailed       = 1 << 1,
+    BKTStateInErrorNetwork        = 1 << 2
 };
 ```
 
-## Booléens
+## Booleans
 
-Puisque `nil` est retourné comme `NO` il n'est pas nécessaire de le comparer dans une condition. 
-Ne comparez jamais quelque chose avec `YES`, parce que `YES` est défini comme 1 et un `BOOL` peut aller jusqu'à 8 bits.
+Objective-C uses `YES` and `NO`.  Therefore `true` and `false` should only be used for CoreFoundation, C or C++ code. 
+Since `nil` resolves to `NO` it is unnecessary to compare it in conditions. Never compare something directly to `YES`, because `YES` is defined to 1 and a `BOOL` can be up to 8 bits.
 
-Ce style permet une plus grande cohérence entre les différents fichiers et une meilleure clarté visuelle.
+This allows for more consistency across files and greater visual clarity.
 
-**Par exemple:**
+**Preferred:**
 
-```
-if (!unObject) {
-}
-```
-
-**Non pas:**
-
-```
-if (unObject == nil) {
-}
+```objc
+if (!someObject)
+if (isSuper)
+if (![someObject boolValue])
 ```
 
-Cependant, il est quand même plus correct d'avoir
-```
-if (monPointeur != nil) {
-}
-```
+**Not preferred:**
 
------
-
-**Pour un `BOOL`, voici deux exemples:**
-
-```
-if (estSuper)
-if (!unObject.boolValue)
+```objc
+if (someObject == nil)
+if (isSuper == YES)
+if ([someObject boolValue] == NO)
 ```
 
-**Non pas:**
+If the name of a `BOOL` property is expressed as an adjective, the property can omit the “is” prefix but specifies the conventional name for the get accessor, for example:
 
-```
-if (estSuper == YES) // Ne faites pas ça
-if (unObject.boolValue == NO)
-```
-
------
-
-Si le nom d'une propriété `BOOL` est exprimée comme un adjectif, la propriété peut omettre le prefixe «&#8239;is&#8239;» mais doit specifier un nom conventionel pour l'accesseur get, par exemple:
-
-```
+```objc
 @property (assign, getter=isEditable) BOOL editable;
 ```
-Voyez le document et exemple pris de [Conseils Généraux de Nommage Cocoa](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingIvarsAndTypes.html#//apple_ref/doc/uid/20001284-BAJGIIJE).
+Text and example taken from the [Cocoa Naming Guidelines](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingIvarsAndTypes.html#//apple_ref/doc/uid/20001284-BAJGIIJE).
 
 
+## Private properties
 
-## Propriétés privées
+Private properties should be declared in class extensions in the implementation file of a class.
 
-Les propriétés privées doivent être déclarées dans l'extension de la classe dans le fichier d'implémentation (la catégorie privée)
+**For example:**
 
-**Par exemple:**
+```objc
+@interface BKTView ()
 
-```
-@interface BkView ()
-
-@property (nonatomic) NSUInteger *bkTag;
-@property (nonatomic) BOOL bkViewIsLoaded;
+@property (nonatomic) NSUInteger *bktTag;
+@property (nonatomic) BOOL bktViewIsLoaded;
 
 @end
 ```
 
+## Error handling
 
-## Literals (On en parle?)
+When methods return an error parameter by reference, switch on the returned value, not the error variable.
 
- * comment les présenter ?
- * Risque de crash si des valeurs sont vides?
+**Preferred:**
 
-
-## Gestion des erreurs
-
-Quand une méthode renvoie un paramètre d'erreur par référence, continuez l'exécution du programme sur la valeur returnée, et non sur la variable erreur.
-
-**Par exemple:**
-
-```
+```objc
 NSError *error;
-if (![self faireQuelqueChoseAvecRecuperationErreur:&error]) {
-// Gérer l'erreur
-// OUI, faireQuelqueChoseAvecRecuperationErreur doit retourner un BOOL pour dire si oui ou non, le résultat est considéré comme ok
+if (![self doSomethingWithError:&error]) {
+    // Handle error
+    // doSomethingWithError should return a BOOL in order to consider if the result is ok or not
 }
 ```
 
-**Non pas:**
+**Not preferred:**
 
-```
+```objc
 NSError *error;
-[self FaireQuelqueChoseAvecErreur:&error];
+[self doSomethingWithError:&error];
 if (error) {
-// Gérer l'erreur
+    // Gérer l'erreur
 }
 ```
 
-Certaines APIs d'Apple renvoient des valeurs de données poubeille pour un paramètre erreur (si non-NULL), donc continuer l'exécution du programme sur l'erreur peut créer des faux négatifs (et par la suite un plantage).
+Some of Apple’s APIs write garbage values to the error parameter (if non-NULL) in successful cases, so switching on the error can cause false negatives (and subsequently crash).
 
-## Fonctions `CGRect`
 
-En accédant à `x`, `y`, `width`, ou `height` d'un `CGRect`, utilisez toujours les [fonctions `CGGeometry`](http://developer.apple.com/library/ios/#documentation/graphicsimaging/reference/CGGeometry/Reference/reference.html) au lieu de l'accès direct au membre struct. Extrait de la référence Apple pour `CGGeometry`:
+## Try / catch
 
-> Toutes les fonctions décrites dans cette référence qui prendre les structures de data CGRect comme donnée standardise implicitement ces rectangles avant de calculer leurs résultats. Pour cette raison, votre application devrait éviter de lire et écrire directement la donnée sauvegardée dans la structure de données CGRect. À la place, utilisez les fonctions décrites ici pour manipuler les rectangles et pour recupérer leurs caractériques.
+**NEVER** use try catch in Objective-C on your own code, except when using a third-party framework that may crash.
 
-**Par exemple:**
 
-```
+## `CGRect` functions
+
+When accessing the `x`, `y`, `width`, or `height` of a `CGRect`, always use the [`CGGeometry` functions](http://developer.apple.com/library/ios/#documentation/graphicsimaging/reference/CGGeometry/Reference/reference.html) instead of direct struct member access. From Apple's `CGGeometry` reference:
+
+> All functions described in this reference that take CGRect data structures as inputs implicitly standardize those rectangles before calculating their results. For this reason, your applications should avoid directly reading and writing the data stored in the CGRect data structure. Instead, use the functions described here to manipulate rectangles and to retrieve their characteristics.
+
+**Preferred:**
+
+```objc
 CGRect frame = self.view.frame;
 
 CGFloat x = CGRectGetMinX(frame);
@@ -671,9 +684,9 @@ CGFloat width = CGRectGetWidth(frame);
 CGFloat height = CGRectGetHeight(frame);
 ```
 
-**Non pas:**
+**Not preferred:**
 
-```
+```objc
 CGRect frame = self.view.frame;
 
 CGFloat x = frame.origin.x;
@@ -682,12 +695,12 @@ CGFloat width = frame.size.width;
 CGFloat height = frame.size.height;
 ```
 
-## Projet Xcode
+## Xcode project
 
-Le choix que nous faisons sur nos projets est une architecture logique.
-Une grande partie des classes sont dans le répertoire /Classes et le projet Xcode présente l'architecture logique.
+We chose to work with a logical architecture.
+A big part of our classes are located in the /Classes folder and represented in Xcode by a logical architecture. 
 
-Un projet classique Backelite s'organise ainsi : 
+A regular Backelite project will be structured like the following :
 
 + YourProjectName
 + - Generic
@@ -705,8 +718,3 @@ Un projet classique Backelite s'organise ainsi :
 + - WS
 + Pods
 + - Lot of pods
-
-
-
-
-
